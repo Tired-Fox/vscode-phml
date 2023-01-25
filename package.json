@@ -1,0 +1,56 @@
+{
+	"name": "PHML",
+	"description": "A pythonic hypertext markup language made for generating html from python data",
+	"author": "Zachary Boehm",
+	"license": "MIT",
+	"version": "0.1.0",
+	"publisher": "Tired Fox",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Tired-Fox/vscode-phml"
+	},
+	"icon": "icons/Icon Dark.png",
+	"categories": [],
+	"keywords": [],
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"activationEvents": [],
+	"main": "./client/out/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "phml",
+				"extensions": [
+					".phml"
+				],
+				"icon": {
+					"dark": "./icons/Icon Dark.png",
+					"light": "./icons/Icon Light.png"
+				}
+			}
+		],
+		"grammars": [
+			{
+				"language": "phml",
+				"scopeName": "text.phml.basic",
+				"path": "./syntaxes/phml.tmLanguage.json"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "cd client && npm install && cd .. && npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^16.11.7",
+		"@typescript-eslint/eslint-plugin": "^4.23.0",
+		"@typescript-eslint/parser": "^4.23.0",
+		"eslint": "^7.26.0",
+		"typescript": "^4.5.5"
+	}
+}
