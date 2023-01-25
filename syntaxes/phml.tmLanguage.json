@@ -45,6 +45,151 @@
 		"attribute": {
 			"patterns": [
 				{
+					"begin": "((:|@)([^\\s=]+))(?![\\w:-])",
+					"beginCaptures": {
+						"0": {
+							"name": "entity.other.attribute-name.html"
+						}
+					},
+					"comment": "PHML attributes, event handlers",
+					"end": "(?=\\s*+[^=\\s])",
+					"name": "meta.attribute.event-handler.$1.html",
+					"patterns": [
+						{
+							"begin": "=",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.separator.key-value.html"
+								}
+							},
+							"end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
+							"patterns": [
+								{
+									"begin": "(?=[^\\s=<>`/]|/(?!>))",
+									"end": "(?!\\G)",
+									"name": "meta.embedded.line.python",
+									"patterns": [
+										{
+											"captures": {
+												"0": {
+													"name": "source.python"
+												},
+												"1": {
+													"patterns": [
+														{
+															"include": "source.python"
+														}
+													]
+												}
+											},
+											"match": "(([^\\s\"'=<>`/]|/(?!>))+)",
+											"name": "string.unquoted.html"
+										},
+										{
+											"begin": "\"",
+											"beginCaptures": {
+												"0": {
+													"name": "punctuation.definition.string.begin.html"
+												}
+											},
+											"contentName": "source.python",
+											"end": "(\")",
+											"endCaptures": {
+												"0": {
+													"name": "punctuation.definition.string.end.html"
+												},
+												"1": {
+													"name": "source.python-ignored-vscode"
+												}
+											},
+											"name": "string.quoted.double.html",
+											"patterns": [
+												{
+													"captures": {
+														"0": {
+															"patterns": [
+																{
+																	"include": "source.python"
+																}
+															]
+														}
+													},
+													"match": "([^\\n\"/]|/(?![/*]))+"
+												},
+												{
+													"begin": "#",
+													"beginCaptures": {
+														"0": {
+															"name": "punctuation.definition.comment.python"
+														}
+													},
+													"end": "(?=\")|\\n",
+													"name": "comment.line.hash_tag.python"
+												},
+												{
+													"match": "(\\w+)",
+													"captures": {
+														"0": {
+															"name": "text.html.basic"
+														}
+													}
+												}
+											]
+										},
+										{
+											"begin": "'",
+											"beginCaptures": {
+												"0": {
+													"name": "punctuation.definition.string.begin.html"
+												}
+											},
+											"contentName": "source.python",
+											"end": "(')",
+											"endCaptures": {
+												"0": {
+													"name": "punctuation.definition.string.end.html"
+												},
+												"1": {
+													"name": "source.python-ignored-vscode"
+												}	
+											},
+											"name": "string.quoted.single.html",
+											"patterns": [
+												{
+													"captures": {
+														"0": {
+															"patterns": [
+																{
+																	"include": "source.python"
+																}
+															]
+														}
+													},
+													"match": "([^\\n'/]|/(?![/*]))+"
+												},
+												{
+													"begin": "#",
+													"beginCaptures": {
+														"0": {
+															"name": "punctuation.definition.comment.python"
+														}
+													},
+													"end": "(?=')|\\n",
+													"name": "comment.line.double-slash.js"
+												}
+											]
+										}
+									]
+								},
+								{
+									"match": "=",
+									"name": "invalid.illegal.unexpected-equals-sign.html"
+								}
+							]
+						}
+					]
+				},
+				{
 					"begin": "(s(hape|cope|t(ep|art)|ize(s)?|p(ellcheck|an)|elected|lot|andbox|rc(set|doc|lang)?)|h(ttp-equiv|i(dden|gh)|e(ight|aders)|ref(lang)?)|n(o(nce|validate|module)|ame)|c(h(ecked|arset)|ite|o(nt(ent(editable)?|rols)|ords|l(s(pan)?|or))|lass|rossorigin)|t(ype(mustmatch)?|itle|a(rget|bindex)|ranslate)|i(s(map)?|n(tegrity|putmode)|tem(scope|type|id|prop|ref)|d)|op(timum|en)|d(i(sabled|r(name)?)|ownload|e(coding|f(er|ault))|at(etime|a)|raggable)|usemap|p(ing|oster|la(ysinline|ceholder)|attern|reload)|enctype|value|kind|for(m(novalidate|target|enctype|action|method)?)?|w(idth|rap)|l(ist|o(op|w)|a(ng|bel))|a(s(ync)?|c(ce(sskey|pt(-charset)?)|tion)|uto(c(omplete|apitalize)|play|focus)|l(t|low(usermedia|paymentrequest|fullscreen))|bbr)|r(ows(pan)?|e(versed|quired|ferrerpolicy|l|adonly))|m(in(length)?|u(ted|ltiple)|e(thod|dia)|a(nifest|x(length)?)))(?![\\w:-])",
 					"beginCaptures": {
 						"0": {
@@ -385,7 +530,7 @@
 					"end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
 					"patterns": [
 						{
-							"match": "([^\\s\"'=<>`/]|/(?!>))+",
+							"match": "([^\\s\"'=<>`/{}]|/(?!>))+",
 							"name": "string.unquoted.html"
 						},
 						{
@@ -403,7 +548,7 @@
 							},
 							"name": "string.quoted.double.html",
 							"patterns": [
-								{
+								{									
 									"include": "#entities"
 								}
 							]
@@ -555,6 +700,95 @@
 					},
 					"match": "(&)#[0-9]+(;)",
 					"name": "constant.character.entity.numeric.decimal.html"
+				},
+				{
+					"begin": "{",
+					"end": "(})",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.tag.begin.html"
+						}
+					},
+					"contentName": "source.python",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.tag.begin.html"
+						},
+						"1": {
+							"name": "source.python-ignored-vscode"
+						}
+					},
+					"patterns": [
+						{
+							"captures": {
+								"0": {
+									"name": "puncutation.definition"
+								}
+							},
+							"match": "\\)"
+						},
+						{
+							"captures": {
+								"0": {
+									"patterns": [
+										{
+											"include": "source.python"
+										}
+									]
+								}
+							},
+							"match": "([^\\n'/{}]|/(?![/*]))+"
+						},
+						{
+							"begin": "#",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.python"
+								}
+							},
+							"end": "(?=')|\\n",
+							"name": "comment.line.double-slash.js"
+						},
+						{
+							"begin": "\"",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.string.begin.html"
+								}
+							},
+							"contentName": "string.unquoted.python",
+							"end": "(\")",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.string.end.python"
+								},
+								"1": {
+									"name": "source.python-ignored-vscode"
+								}
+							},
+							"name": "string.quoted.double.html"
+						},
+						{
+							"begin": "'",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.string.begin.html"
+								}
+							},
+							"contentName": "string.unquoted.python",
+							"end": "(')",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.string.end.html"
+								},
+								"1": {
+									"name": "source.python-ignored-vscode"
+								}	
+							},
+							"name": "string.quoted.single.html"
+						}
+					],
+					"name": "constant.character.python"
 				},
 				{
 					"captures": {
