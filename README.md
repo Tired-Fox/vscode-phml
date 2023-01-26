@@ -1,5 +1,7 @@
 # PHML
 
+![PHML Logo](./images/Logo.png)
+
 A pythonic hypertext markup language built to use python data and logic to build html pages.
 
 The language works like most markup languages for html like Vue.js, React.js, etc.

@@ -29,7 +29,7 @@ connection.onInitialize((_params: InitializeParams) => {
 	};
 });
 
-connection.onCompletion(async (textDocumentPosition, token) => {
+connection.onCompletion(async (textDocumentPosition: any, token: any) => {
 	const document = documents.get(textDocumentPosition.textDocument.uri);
 	if (!document) {
 		return null;
