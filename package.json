@@ -25,8 +25,8 @@
 					".phml"
 				],
 				"icon": {
-					"dark": "./icons/File Icon.png",
-					"light": "./icons/File Icon.png"
+					"dark": "./icons/phml_icon.png",
+					"light": "./icons/phml_icon.png"
 				}
 			}
 		],
