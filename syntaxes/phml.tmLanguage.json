@@ -45,7 +45,7 @@
 		"attribute": {
 			"patterns": [
 				{
-					"begin": "(@(?:if|elif))|(:[\\w:]+)",
+					"begin": "(@(?:if|elif))|(:[\\w:\\-]+)",
 					"beginCaptures": {
 						"0": {
 							"name": "entity.other.attribute-name.html"
@@ -89,14 +89,14 @@
 											"begin": "\"",
 											"beginCaptures": {
 												"0": {
-													"name": "punctuation.definition.string.begin.html"
+													"name": "punctuation.definition.tag.begin.html"
 												}
 											},
 											"contentName": "source.python",
 											"end": "(\")",
 											"endCaptures": {
 												"0": {
-													"name": "punctuation.definition.string.end.html"
+													"name": "punctuation.definition.tag.end.html"
 												},
 												"1": {
 													"name": "source.python-ignored-vscode"
@@ -140,14 +140,14 @@
 											"begin": "'",
 											"beginCaptures": {
 												"0": {
-													"name": "punctuation.definition.string.begin.html"
+													"name": "punctuation.definition.tag.begin.html"
 												}
 											},
 											"contentName": "source.python",
 											"end": "(')",
 											"endCaptures": {
 												"0": {
-													"name": "punctuation.definition.string.end.html"
+													"name": "punctuation.definition.tag.end.html"
 												},
 												"1": {
 													"name": "source.python-ignored-vscode"
@@ -217,6 +217,71 @@
 										{
 											"match": "(([^\\s=<>`/]|/(?!>))+)",
 											"name": "invalid.illegal.characters-not-allowed-here.html"
+										}
+									]
+								},
+								{
+									"match": "=",
+									"name": "invalid.illegal.unexpected-equals-sign.html"
+								}
+							]
+						}
+					]
+				},
+				{
+					"begin": "([\\w:\\-]+)(?=={)",
+					"beginCaptures": {
+						"0": {
+							"name": "entity.other.attribute-name.html"
+						}
+					},
+					"comment": "PHML attributes, event handlers",
+					"end": "(?=\\s*+[^=\\s])",
+					"name": "meta.attribute.event-handler.$1.html",
+					"patterns": [
+						{
+							"begin": "=",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.separator.key-value.html"
+								}
+							},
+							"end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
+							"patterns": [
+								{
+									"begin": "(?=[^\\s=<>`/]|/(?!>))",
+									"end": "(?!\\G)",
+									"name": "meta.embedded.line.python",
+									"patterns": [
+										{
+											"begin": "{",
+											"beginCaptures": {
+												"0": {
+													"name": "punctuation.definition.tag.begin.html"
+												}
+											},
+											"contentName": "source.python",
+											"end": "(})",
+											"endCaptures": {
+												"0": {
+													"name": "punctuation.definition.tag.end.html"
+												}
+											},
+											"name": "text.python.basic",
+											"patterns": [
+												{
+													"captures": {
+														"0": {
+															"patterns": [
+																{
+																	"include": "source.python"
+																}
+															]
+														}
+													},
+													"match": "([^}\"]|/(?![/*]))+"
+												}
+											]
 										}
 									]
 								},
