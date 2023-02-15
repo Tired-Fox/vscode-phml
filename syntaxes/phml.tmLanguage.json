@@ -70,6 +70,36 @@
 									"name": "meta.embedded.line.python",
 									"patterns": [
 										{
+											"begin": "{",
+											"beginCaptures": {
+												"0": {
+													"name": "punctuation.definition.tag.begin.html"
+												}
+											},
+											"contentName": "source.python",
+											"end": "(})",
+											"endCaptures": {
+												"0": {
+													"name": "punctuation.definition.tag.end.html"
+												}
+											},
+											"name": "text.python.basic",
+											"patterns": [
+												{
+													"captures": {
+														"0": {
+															"patterns": [
+																{
+																	"include": "source.python"
+																}
+															]
+														}
+													},
+													"match": "([^}\"]|/(?![/*]))+"
+												}
+											]
+										},
+										{
 											"captures": {
 												"0": {
 													"name": "source.python"
