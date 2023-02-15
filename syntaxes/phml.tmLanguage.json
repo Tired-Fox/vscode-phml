@@ -45,7 +45,7 @@
 		"attribute": {
 			"patterns": [
 				{
-					"begin": "((:|@)([^\\s=]+))(?![\\w:-])",
+					"begin": "(@(?:if|elif))|(:[\\w:]+)",
 					"beginCaptures": {
 						"0": {
 							"name": "entity.other.attribute-name.html"
@@ -83,7 +83,7 @@
 												}
 											},
 											"match": "(([^\\s\"'=<>`/]|/(?!>))+)",
-											"name": "string.unquoted.html"
+											"name": "text.python.basic"
 										},
 										{
 											"begin": "\"",
@@ -102,7 +102,7 @@
 													"name": "source.python-ignored-vscode"
 												}
 											},
-											"name": "string.quoted.double.html",
+											"name": "text.python.basic",
 											"patterns": [
 												{
 													"captures": {
@@ -130,7 +130,7 @@
 													"match": "(\\w+)",
 													"captures": {
 														"0": {
-															"name": "text.html.basic"
+															"name": "text.python.basic"
 														}
 													}
 												}
@@ -153,7 +153,7 @@
 													"name": "source.python-ignored-vscode"
 												}	
 											},
-											"name": "string.quoted.single.html",
+											"name": "text.python.basic",
 											"patterns": [
 												{
 													"captures": {
@@ -178,6 +178,45 @@
 													"name": "comment.line.double-slash.js"
 												}
 											]
+										}
+									]
+								},
+								{
+									"match": "=",
+									"name": "invalid.illegal.unexpected-equals-sign.html"
+								}
+							]
+						}
+					]
+				},
+				{
+					"begin": "@else",
+					"beginCaptures": {
+						"0": {
+							"name": "entity.other.attribute-name.html"
+						}
+					},
+					"comment": "PHML attributes, event handlers",
+					"end": "(?=\\s*+[^=\\s])",
+					"name": "meta.attribute.event-handler.$1.html",
+					"patterns": [
+						{
+							"begin": "=",
+							"beginCaptures": {
+								"0": {
+									"name": "invalid.illegal.unexpected-equals-sign.html"
+								}
+							},
+							"end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
+							"patterns": [
+								{
+									"begin": "(?=[^\\s=<>`/]|/(?!>))",
+									"end": "(?!\\G)",
+									"name": "meta.embedded.line.python",
+									"patterns": [
+										{
+											"match": "(([^\\s=<>`/]|/(?!>))+)",
+											"name": "invalid.illegal.characters-not-allowed-here.html"
 										}
 									]
 								},
@@ -788,7 +827,7 @@
 							"name": "string.quoted.single.html"
 						}
 					],
-					"name": "constant.character.python"
+					"name": "text.python.basic"
 				},
 				{
 					"captures": {
