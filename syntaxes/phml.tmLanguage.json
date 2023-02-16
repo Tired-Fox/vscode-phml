@@ -70,34 +70,23 @@
 									"name": "meta.embedded.line.python",
 									"patterns": [
 										{
-											"begin": "{",
-											"beginCaptures": {
-												"0": {
+											"match": "({)((?:\\s|.)*)(/})",
+											"captures": {
+												"1": {
 													"name": "punctuation.definition.tag.begin.html"
-												}
-											},
-											"contentName": "source.python",
-											"end": "(})",
-											"endCaptures": {
-												"0": {
+												},
+												"2": {
+													"patterns": [
+														{
+															"include": "source.python"
+														}
+													]
+												},
+												"3": {
 													"name": "punctuation.definition.tag.end.html"
 												}
 											},
-											"name": "text.python.basic",
-											"patterns": [
-												{
-													"captures": {
-														"0": {
-															"patterns": [
-																{
-																	"include": "source.python"
-																}
-															]
-														}
-													},
-													"match": "([^}\"]|/(?![/*]))+"
-												}
-											]
+											"name": "text.python.basic"
 										},
 										{
 											"captures": {
@@ -119,14 +108,14 @@
 											"begin": "\"",
 											"beginCaptures": {
 												"0": {
-													"name": "punctuation.definition.tag.begin.html"
+													"name": "punctuation.definition.string.end.html"
 												}
 											},
 											"contentName": "source.python",
 											"end": "(\")",
 											"endCaptures": {
 												"0": {
-													"name": "punctuation.definition.tag.end.html"
+													"name": "punctuation.definition.string.end.html"
 												},
 												"1": {
 													"name": "source.python-ignored-vscode"
@@ -170,14 +159,14 @@
 											"begin": "'",
 											"beginCaptures": {
 												"0": {
-													"name": "punctuation.definition.tag.begin.html"
+													"name": "punctuation.definition.string.begin.html"
 												}
 											},
 											"contentName": "source.python",
 											"end": "(')",
 											"endCaptures": {
 												"0": {
-													"name": "punctuation.definition.tag.end.html"
+													"name": "punctuation.definition.string.end.html"
 												},
 												"1": {
 													"name": "source.python-ignored-vscode"
@@ -284,34 +273,23 @@
 									"name": "meta.embedded.line.python",
 									"patterns": [
 										{
-											"begin": "{",
-											"beginCaptures": {
-												"0": {
+											"match": "({)((?:\\s|.)*)(/})",
+											"captures": {
+												"1": {
 													"name": "punctuation.definition.tag.begin.html"
-												}
-											},
-											"contentName": "source.python",
-											"end": "(})",
-											"endCaptures": {
-												"0": {
+												},
+												"2": {
+													"patterns": [
+														{
+															"include": "source.python"
+														}
+													]
+												},
+												"3": {
 													"name": "punctuation.definition.tag.end.html"
 												}
 											},
-											"name": "text.python.basic",
-											"patterns": [
-												{
-													"captures": {
-														"0": {
-															"patterns": [
-																{
-																	"include": "source.python"
-																}
-															]
-														}
-													},
-													"match": "([^}\"]|/(?![/*]))+"
-												}
-											]
+											"name": "text.python.basic"
 										}
 									]
 								},
