@@ -17,6 +17,11 @@
 	},
 	"activationEvents": [],
 	"main": "./client/out/extension",
+	"configurationDefaults": {
+		"editor.tokenColorSCusomizations": {
+			"text.phml.basic": "#FFF"
+		}
+	},
 	"contributes": {
 		"languages": [
 			{
@@ -35,6 +40,13 @@
 				"language": "phml",
 				"scopeName": "text.phml.basic",
 				"path": "./syntaxes/phml.tmLanguage.json"
+			}
+		],
+		"semanticTokenScopes": [
+			{
+				"scopes": {
+					"templateType": ["text.html.basic"]
+				}
 			}
 		]
 	},
